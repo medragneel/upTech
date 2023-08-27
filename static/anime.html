@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Uptech -movie Tv show </title>
+
+
+    <link rel="stylesheet" href="css/style.css" media="all">
+
+</head>
+
+<body>
+    <nav class="nav pl-2 pr-2">
+        <div class="logo">UpTech</div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/movies">Movies</a></li>
+                <li><a href="/tv-shows">TvShows</a></li>
+                <li><a href="/anime">animes</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <div class="container">
+
+        <h1 class="txt-light align-center">What do you want to watch ?</h1>
+
+        <br>
+        <br>
+
+        <center>
+            <form>
+                <i class="fa-solid fa-magnifying-glass pr-1"></i>
+
+                <input type="text" name="q" value="" placeholder="search for Animes">
+            </form>
+        </center>
+        <br>
+        <br>
+        <center>
+            <ul class="grid">
+                {{range .Results}}
+                <a href="/{{.ID}}">
+
+                    <li class="card">
+                        <div class="card-head">
+
+                            <img src={{.Image}} alt="">
+                        </div>
+                        <div class="card-body txt-dark">
+
+                            <h2 class="card-title">{{.Title}}</h2>
+                            <br>
+
+                            <b>{{.ReleaseDate}}</b>
+                            <br>
+
+                        </div>
+                    </li>
+                </a>
+                {{end}}
+            </ul>
+        </center>
+
+
+    </div>
+    <br>
+    <br>
+
+
+    <script src="https://kit.fontawesome.com/dffcb81fbc.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

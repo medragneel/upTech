@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{template "title" .}} -Uptech</title>
+
+
+    <link rel="stylesheet" href="css/style.css" media="all">
+
+</head>
+
+<body>
+    <nav class="nav pl-2 pr-2">
+        <div class="logo"><a class="txt-light" href="/">UpTech</a></div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/movies">Movies</a></li>
+                <li><a href="/tv-shows">TvShows</a></li>
+                <li><a href="/anime">animes</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <main>
+        {{template "main" .}}
+
+    </main>
+
+    <footer>Powered by <a href='https://golang.org/'>Go</a></footer>
+
+    <script src="https://kit.fontawesome.com/dffcb81fbc.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
+{{end}}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Uptech -movie Tv show </title>
+
+
+    <link rel="stylesheet" href="css/style.css" media="all">
+
+</head>
+
+<body>
+    <nav class="nav pl-2 pr-2">
+        <div class="logo">UpTech</div>
+        <div class="nav-links">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/movies">Movies</a></li>
+                <li><a href="/tv-shows">TvShows</a></li>
+                <li><a href="/anime">animes</a></li>
+            </ul>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <a href="/anime" class="fs-lg p-3"><i class="fa-solid fa-arrow-left"></i></a>
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="content ds-f">
+            <div class="title">
+
+                <img src={{.Image}} alt={{.Title}}>
+                <br>
+                <br>
+
+                <h1 class="txt-light align-center">{{.Title}}</h1>
+                <br>
+            </div>
+            <div class="desc pr-3 pl-3">
+
+
+                <span class="bg-success p-1">{{.Status}}</span>
+                <br>
+                <br>
+
+                <h1 class="txt-light">Description</h1>
+                <br>
+                <h4>{{.Description }}</h4>
+                <br>
+
+                <h2>Genres</h2>
+                <br>
+
+                {{range .Genres}}
+                <span class="bg-danger p-1 ml-2">{{.}}</span>
+                {{end}}
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+
+        <div class="container">
+            <h1 class="txt-light">Episodes</h1>
+            <br>
+            <br>
+
+            <ul class="grid">
+                {{range .Episodes}}
+                <a class="bg-danger p-1" href="/watch/{{.ID}}">
+                    <li>{{.Number}}</li>
+
+                </a>
+                {{end}}
+            </ul>
+        </div>
+
+
+    </div>
+    <br>
+    <br>
+
+
+    <script src="https://kit.fontawesome.com/dffcb81fbc.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
