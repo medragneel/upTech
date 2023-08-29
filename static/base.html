@@ -1,3 +1,4 @@
+{{define "base"}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,31 +7,59 @@
     <title>{{template "title" .}} -Uptech</title>
 
 
-    <link rel="stylesheet" href="css/style.css" media="all">
+    <link rel="stylesheet" href="/css/style.css" media="all">
+    <link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
 
 </head>
 
 <body>
     <nav class="nav pl-2 pr-2">
-        <div class="logo"><a class="txt-light" href="/">UpTech</a></div>
+        <div class="logo"><a class="txt-light" href="/"> <i class="fa-solid fa-cloud"></i> UpTech</a></div>
         <div class="nav-links">
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/movies">Movies</a></li>
-                <li><a href="/tv-shows">TvShows</a></li>
-                <li><a href="/anime">animes</a></li>
+                <li><a  href="/"> Home</a></li>
+                <li><a  href="/movies">Movies</a></li>
+                <li><a  href="/tv-shows">TvShows</a></li>
+                <li><a  href="/anime">Animes</a></li>
+                <li><a  href="/search"> <i class="fa-solid fa-magnifying-glass"></i> </a></li>
+
             </ul>
         </div>
     </nav>
+
+    <!-- <div class="side-container"> -->
+    <!--     <div class="sidebar"> -->
+    <!--         <span class="logo"><a href="/"><i class="fa-solid fa-cloud txt-primary-darken-3 fs-lg"></i></a></span> -->
+    <!--         <div class="side-links ds-f js-s-between"> -->
+    <!--             <ul> -->
+    <!--                 <li><a href="/"><i class="fa-solid fa-house"></i></a></li> -->
+    <!--                 <li><a href="/movies"><i class="fa-solid fa-film"></i></a></li> -->
+    <!--                 <li><a href="/tv-shows"><i class="fa-solid fa-tv"></i></a></li> -->
+    <!--                 <li><a href="/anime"><i class="fa-solid fa-laptop"></i></a></li> -->
+    <!--             </ul> -->
+    <!--         </div> -->
+    <!--     </div> -->
+    <!---->
+    <!-- </div> -->
+    <!---->
+
     <br>
     <br>
-    <main>
-        {{template "main" .}}
+    <center>
 
-    </main>
+        <div class="mt-2">
+            {{template "main" .}}
+        </div>
+    </center>
 
-    <footer>Powered by <a href='https://golang.org/'>Go</a></footer>
 
+    <br>
+
+    </div>
+
+
+
+    <script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
     <script src="https://kit.fontawesome.com/dffcb81fbc.js" crossorigin="anonymous"></script>
 </body>
 

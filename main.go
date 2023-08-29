@@ -13,6 +13,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
+const baseUrl = "http://localhost:3000/"
+
 func getenv(key string) (string, error) {
 	err := godotenv.Load(".env")
 	if err != nil {
@@ -22,12 +24,55 @@ func getenv(key string) (string, error) {
 	return auth, nil
 }
 func home(w http.ResponseWriter, r *http.Request) {
+	var feeds []Feed
+	files := []string{
+		"./static/base.html",
+		"./static/index.html",
+	}
+	url := baseUrl + "news/ann/recent-feeds"
+	req, _ := http.NewRequest("GET", url, nil)
+
+	req.Header.Add("accept", "application/json")
+	res, err := http.DefaultClient.Do(req)
+
+	body, err := io.ReadAll(res.Body)
+	if err != nil {
+		log.Println("Error reading response body:", err)
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+
+	if err = json.Unmarshal(body, &feeds); err != nil {
+		log.Println("Error in JSON Unmarshal:", err)
+		http.Error(w, "Bad Request", http.StatusBadRequest)
+		return
+	}
+
+	tmpl, err := template.ParseFiles(files...)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+		return
+
+	}
+	err = tmpl.ExecuteTemplate(w, "base", feeds)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
+
+}
+
+func search(w http.ResponseWriter, r *http.Request) {
 	a, err := getenv("AUTH")
-	print(fmt.Sprintf("Bearer %s", a))
 	if err != nil {
 		log.Println("Error loading environment variable:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
 		return
+	}
+	files := []string{
+		"./static/base.html",
+		"./static/search.html",
 	}
 	var response Response
 	query := r.FormValue("q")
@@ -53,19 +98,27 @@ func home(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Println("Response Body:", string(body))
-	tmpl, err := template.ParseFiles("./static/index.html")
+	tmpl, err := template.ParseFiles(files...)
 	if err != nil {
-		panic(err)
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+		return
 
 	}
-	tmpl.Execute(w, response)
+	err = tmpl.ExecuteTemplate(w, "base", response)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 	defer res.Body.Close()
 
 }
 func fetchMovies(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./static/base.html",
+		"./static/movies.html",
+	}
 	a, err := getenv("AUTH")
-	print(fmt.Sprintf("Bearer %s", a))
 	if err != nil {
 		log.Println("Error loading environment variable:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -84,12 +137,16 @@ func fetchMovies(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	tmpl, err := template.ParseFiles("./static/movies.html")
+	tmpl, err := template.ParseFiles(files...)
 	if err != nil {
 		panic(err)
 
 	}
-	tmpl.Execute(w, Movies)
+	tmpl.ExecuteTemplate(w, "base", Movies)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 	// fmt.Fprintf(w,string(body))
 
 	defer res.Body.Close()
@@ -97,8 +154,11 @@ func fetchMovies(w http.ResponseWriter, r *http.Request) {
 
 // fetch tv Shows
 func fetchTvShows(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./static/base.html",
+		"./static/tv.html",
+	}
 	a, err := getenv("AUTH")
-	print(fmt.Sprintf("Bearer %s", a))
 	if err != nil {
 		log.Println("Error loading environment variable:", err)
 		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
@@ -109,7 +169,7 @@ func fetchTvShows(w http.ResponseWriter, r *http.Request) {
 	url := "https://api.themoviedb.org/3/trending/tv/day?language=en-US"
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("accept", "application/json")
-	req.Header.Add("Authorization", "Bearer " + a)
+	req.Header.Add("Authorization", "Bearer "+a)
 
 	res, err := http.DefaultClient.Do(req)
 	body, _ := io.ReadAll(res.Body)
@@ -118,12 +178,16 @@ func fetchTvShows(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	tmpl, err := template.ParseFiles("./static/tv.html")
+	tmpl, err := template.ParseFiles(files...)
 	if err != nil {
 		panic(err)
 
 	}
-	tmpl.Execute(w, tvshows)
+	tmpl.ExecuteTemplate(w, "base", tvshows)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 	// fmt.Fprintf(w,string(body))
 
 	defer res.Body.Close()
@@ -131,11 +195,15 @@ func fetchTvShows(w http.ResponseWriter, r *http.Request) {
 
 // fetch Anime
 func fetchAnime(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./static/base.html",
+		"./static/anime.html",
+	}
 	var animes AnimeList
 	// vars := mux.Vars(r)
 	vals := r.URL.Query()
 	query := vals.Get("q")
-	url := fmt.Sprintf("http://localhost:3000/anime/gogoanime/%s", query)
+	url := fmt.Sprintf(baseUrl+"anime/gogoanime/%s", query)
 
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("accept", "application/json")
@@ -146,13 +214,17 @@ func fetchAnime(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	tmpl, err := template.ParseFiles("./static/anime.html")
+	tmpl, err := template.ParseFiles(files...)
 
 	if err != nil {
 		panic(err)
 
 	}
-	tmpl.Execute(w, animes)
+	err = tmpl.ExecuteTemplate(w, "base", animes)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 	defer res.Body.Close()
 
 }
@@ -160,10 +232,14 @@ func fetchAnime(w http.ResponseWriter, r *http.Request) {
 // get anime info
 
 func getAnimeInfo(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./static/base.html",
+		"./static/animeInfo.html",
+	}
 	var infos AnimeInfo
 	vars := mux.Vars(r)
 	id := vars["id"]
-	url := fmt.Sprintf("http://localhost:3000/anime/gogoanime/info/%s", id)
+	url := fmt.Sprintf(baseUrl+"anime/gogoanime/info/%s", id)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("accept", "application/json")
 	res, err := http.DefaultClient.Do(req)
@@ -173,24 +249,32 @@ func getAnimeInfo(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	tmpl, err := template.ParseFiles("./static/animeInfo.html")
+	tmpl, err := template.ParseFiles(files...)
 
 	if err != nil {
 		panic(err)
 
 	}
-	tmpl.Execute(w, infos)
+	err = tmpl.ExecuteTemplate(w, "base", infos)
+	if err != nil {
+		log.Print(err.Error())
+		http.Error(w, "Internal Server Error", 500)
+	}
 	defer res.Body.Close()
 
 }
 
 func getServers(w http.ResponseWriter, r *http.Request) {
+	files := []string{
+		"./static/base.html",
+		"./static/servers.html",
+	}
 	// var servers []Server
 	var response RequestData
 	vars := mux.Vars(r)
 	id := vars["epid"]
 	// url := fmt.Sprintf("http://localhost:3000/anime/gogoanime/servers/%s", id)
-	url := fmt.Sprintf("http://localhost:3000/anime/gogoanime/watch/%s", id)
+	url := fmt.Sprintf(baseUrl+"anime/gogoanime/watch/%s", id)
 	req, _ := http.NewRequest("GET", url, nil)
 	req.Header.Add("accept", "application/json")
 	res, err := http.DefaultClient.Do(req)
@@ -200,13 +284,13 @@ func getServers(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
-	tmpl, err := template.ParseFiles("./static/servers.html")
+	tmpl, err := template.ParseFiles(files...)
 
 	if err != nil {
 		panic(err)
 
 	}
-	tmpl.Execute(w, response)
+	err = tmpl.ExecuteTemplate(w, "base", response)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
@@ -224,6 +308,7 @@ func main() {
 		http.StripPrefix("/css/", http.FileServer(http.Dir("static/css/"))),
 	)
 	r.HandleFunc("/", home)
+	r.HandleFunc("/search", search)
 	r.HandleFunc("/movies", fetchMovies)
 	r.HandleFunc("/tv-shows", fetchTvShows)
 	r.HandleFunc("/anime", fetchAnime)

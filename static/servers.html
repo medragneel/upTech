@@ -1,201 +1,167 @@
-<!DOCTYPE html>
-<html lang="en">
+{{define "title"}} Watch Anime {{end}}
+{{define "main"}}
+<style>
+    .video-container {
+        width: 480px;
+        /* Set your desired width */
+        height: 270px;
+        /* Set your desired height */
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <title>Uptech -movie Tv show </title>
+    /* Resize the video player to fit the container */
+    .video-js {
+        width: 100%;
+        height: 100%;
+    }
 
 
-    <link rel="stylesheet" href="/css/style.css" media="all">
-
-    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet">
-    <script src="https://vjs.zencdn.net/7.15.4/video.js" defer></script>
-    <link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet" />
-
-
-    <!-- Forest -->
-    <link href="https://unpkg.com/@videojs/themes@1/dist/forest/index.css" rel="stylesheet">
-</head>
-</head>
-
-<body>
-    <style>
-        .video-container {
-            width: 480px;
-            /* Set your desired width */
-            height: 270px;
-            /* Set your desired height */
+    .vjs-custom-theme {
+        .vjs-control-bar {
+            background-color: transparent !important;
         }
 
-        /* Resize the video player to fit the container */
-        .video-js {
-            width: 100%;
-            height: 100%;
+        .vjs-big-play-button {
+            opacity: 0 !important;
         }
 
+        .vjs-volume-control {
+            align-items: center !important;
+        }
 
-        .vjs-custom-theme {
-            .vjs-control-bar {
-                background-color: transparent !important;
-            }
+        .vjs-play-progress:before {
+            top: -4px !important;
+        }
 
-            .vjs-big-play-button {
-                opacity: 0 !important;
-            }
-
-            .vjs-volume-control {
-                align-items: center !important;
-            }
-
-            .vjs-play-progress:before {
-                top: -4px !important;
-            }
-
-            .vjs-fullscreen-control {
-                .vjs-icon-placeholder {
-                    &:before {
-                        line-height: 30px;
-                    }
+        .vjs-fullscreen-control {
+            .vjs-icon-placeholder {
+                &:before {
+                    line-height: 30px;
                 }
-            }
-
-            button {
-                &:hover {
-                    color: #fff;
-                }
-            }
-
-            .vjs-progress-control .vjs-progress-holder {
-                margin: 0 10px;
-                background: rgba(255, 255, 255, 0.25);
-                height: 1px;
-            }
-
-            .vjs-progress-control {
-                &:hover {
-                    .vjs-play-progress:before {
-                        top: -7px !important;
-                    }
-                }
-            }
-
-            .vjs-control-bar {
-                height: 54px;
-                background: none;
-                display: -webkit-box;
-                display: -ms-flexbox;
-                display: flex;
-                visibility: visible;
-                opacity: 1;
-                -webkit-transition: visibility 0.1s, opacity 0.1s;
-                -o-transition: visibility 0.1s, opacity 0.1s;
-                transition: visibility 0.1s, opacity 0.1s;
-            }
-
-            .vjs-volume-panel {
-                -webkit-box-ordinal-group: 5;
-                -ms-flex-order: 4;
-                order: 4;
-                display: flex;
-                align-items: center;
-            }
-
-            .vjs-fullscreen-control {
-                -webkit-box-ordinal-group: 5;
-                -ms-flex-order: 5;
-                order: 5;
-            }
-
-            .vjs-picture-in-picture-control,
-            .vjs-remaining-time {
-                display: none;
-            }
-
-            .vjs-play-control {
-                width: 5em !important;
-            }
-
-            .vjs-play-control .vjs-icon-placeholder::before {
-                font-size: 13px;
-                letter-spacing: 0.16px;
-                content: "Play" !important;
-                font-family: sans-serif;
-                line-height: 30px;
-            }
-
-            .vjs-play-control.vjs-playing .vjs-icon-placeholder::before {
-                content: "Pause" !important;
-                font-family: sans-serif;
             }
         }
-    </style>
-    <nav class="nav pl-2 pr-2">
-        <div class="logo">UpTech</div>
-        <div class="nav-links">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/movies">Movies</a></li>
-                <li><a href="/tv-shows">TvShows</a></li>
-                <li><a href="/anime">animes</a></li>
-            </ul>
-        </div>
-    </nav>
-    <br>
-    <br>
-    <a href="/anime" class="fs-lg p-3"><i class="fa-solid fa-arrow-left"></i></a>
-    <br>
-    <br>
+
+        button {
+            &:hover {
+                color: #fff;
+            }
+        }
+
+        .vjs-progress-control .vjs-progress-holder {
+            margin: 0 10px;
+            background: rgba(255, 255, 255, 0.25);
+            height: 1px;
+        }
+
+        .vjs-progress-control {
+            &:hover {
+                .vjs-play-progress:before {
+                    top: -7px !important;
+                }
+            }
+        }
+
+        .vjs-control-bar {
+            height: 54px;
+            background: none;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            visibility: visible;
+            opacity: 1;
+            -webkit-transition: visibility 0.1s, opacity 0.1s;
+            -o-transition: visibility 0.1s, opacity 0.1s;
+            transition: visibility 0.1s, opacity 0.1s;
+        }
+
+        .vjs-volume-panel {
+            -webkit-box-ordinal-group: 5;
+            -ms-flex-order: 4;
+            order: 4;
+            display: flex;
+            align-items: center;
+        }
+
+        .vjs-fullscreen-control {
+            -webkit-box-ordinal-group: 5;
+            -ms-flex-order: 5;
+            order: 5;
+        }
+
+        .vjs-picture-in-picture-control,
+        .vjs-remaining-time {
+            display: none;
+        }
+
+        .vjs-play-control {
+            width: 5em !important;
+        }
+
+        .vjs-play-control .vjs-icon-placeholder::before {
+            font-size: 13px;
+            letter-spacing: 0.16px;
+            content: "Play" !important;
+            font-family: sans-serif;
+            line-height: 30px;
+        }
+
+        .vjs-play-control.vjs-playing .vjs-icon-placeholder::before {
+            content: "Pause" !important;
+            font-family: sans-serif;
+        }
+    }
+</style>
+<br>
+<a href="/anime" class="fs-lg p-3"><i class="fa-solid fa-arrow-left"></i></a>
+<br>
+<br>
 
 
-    <div class="container">
-        <h1 class="txt-light">Links</h1>
-        <br>
-        <br>
-        <center>
-            {{range .Sources}}
-            <a class="video-link p-1 bg-danger" href={{.URL}} target="_self">{{.Quality}}</a>
-            {{end}}
-        </center>
-    </div>
-
+<div class="container">
+    <h1 class="txt-light">Links</h1>
     <br>
     <br>
     <center>
-        <div class="video-container">
-            <video id="my-video" class="video-js vjs-custom-theme" controls preload="auto" data-setup='{}' loop
-                controls>
-                <source src="" type='application/x-mpegURL'>
-            </video>
-        </div>
+        {{range .Sources}}
+        <a class="video-link p-1 bg-danger" href={{.URL}} target="_self">{{.Quality}}</a>
+        {{end}}
     </center>
-    <br>
-    <br>
-    <br>
+</div>
 
+<br>
+<br>
+<center>
+    <div class="video-container">
+        <video id="my-video" class="video-js vjs-custom-theme" controls="true" preload="auto" data-setup='{}' loop
+            controls>
+            <source src="" type='application/x-mpegURL'>
+        </video>
+    </div>
+</center>
+<br>
+<br>
+<br>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const videoPlayer = videojs('my-video');
+<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
 
-            const videoLinks = document.querySelectorAll('.video-link');
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const videoPlayer = videojs('my-video');
 
-            videoLinks.forEach(link => {
-                link.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const videoUrl = this.getAttribute('href');
-                    videoPlayer.src(videoUrl);
-                    videoPlayer.ready(function () {
-                        // videoPlayer.play();
-                        videoPlayer.play().catch(error => console.log(error));
+        const videoLinks = document.querySelectorAll('.video-link');
 
-                    })
-                });
+        videoLinks.forEach(link => {
+            link.addEventListener('click', function (event) {
+                event.preventDefault();
+                const videoUrl = this.getAttribute('href');
+                videoPlayer.src(videoUrl);
+                videoPlayer.ready(function () {
+                    // videoPlayer.play();
+                    videoPlayer.play().catch(error => console.log(error));
+
+                })
             });
         });
+    });
 
-    </script>
-
-    <script src="https://kit.fontawesome.com/dffcb81fbc.js" crossorigin="anonymous"></script>
-</body>
-
-</html>
+</script>
+{{end}}

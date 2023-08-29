@@ -145,3 +145,17 @@ type RequestData struct {
 	Sources  []Source       `json:"sources"`
 }
 
+type Preview struct {
+	Intro string `json:"intro"`
+	Full  string `json:"full"`
+}
+
+type Feed struct {
+	Title      string    `json:"title"`
+	ID         string    `json:"id"`
+	UploadedAt string    `json:"uploadedAt"`
+	Topics     []string  `json:"topics"`
+	Preview    Preview   `json:"preview"`
+	Thumbnail  string    `json:"thumbnail"`
+	URL        string    `json:"url"`
+}

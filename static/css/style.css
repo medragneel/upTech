@@ -398,6 +398,9 @@ input[type=radio]:checked {
   width: 10em;
   margin-bottom: 0.75rem;
 }
+.card-head img{
+    border-radius: 0.7rem;
+}
 .card .card-body {
   font-size: 0.75rem;
   text-align: center;
@@ -2002,7 +2005,7 @@ nav:default {
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: "Bord Demo", sans-serif;
 }
 
@@ -2011,6 +2014,13 @@ nav:default {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+.nav-links a {
+  color: hsl(0deg, 0%, 93%);
+}
+.nav-links a:hover{
+  color: hsl(211deg, 90%, 50%);
+
 }
 
 .hamburger {
@@ -2249,3 +2259,102 @@ table th, table td {
   background-color: var(--dropdown-link-background);
 }
 
+
+
+.main-page{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-height: 100vh;
+}
+
+/* Sidebar Styles */
+.side-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100px; /* Adjust the width as needed */
+    height: 100%;
+    color: #fff; /* Text color */
+    padding-top: 40px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.sidebar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10rem;
+}
+
+
+.side-links ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+    list-style: none;
+    padding: 0;
+}
+
+.side-links li {
+    margin-bottom: 10px;
+}
+
+.side-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.25rem;
+    transition: color 0.3s ease;
+}
+
+
+.side-links a i:hover {
+    color:#1f07e3 ; /* Hover color */
+}
+
+/* FontAwesome Icons */
+.fa-solid {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+/* Adjust the icon size as needed */
+.fa-house:before {
+    content: "\f015"; /* Home icon */
+}
+
+.fa-film:before {
+    content: "\f008"; /* Film icon */
+}
+
+.fa-tv:before {
+    content: "\f26c"; /* TV icon */
+}
+
+.fa-ghost:before {
+    content: "\f6b1"; /* Ghost icon */
+}
+.feeds{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    flex-direction: column;
+}
+
+.feed-card {
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+}
+.feed-card-head img{
+    border-radius: 0.75rem;
+}
+.feed-card-body {
+    display: flex;
+    justify-content: space-between;
+    align-items: self-end;
+    flex-direction: column;
+}

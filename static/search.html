@@ -1,0 +1,77 @@
+{{define "title"}} Search {{end}}
+
+{{define "main"}}
+
+
+<div class="container">
+    <h1 class="txt-light align-center">What do you want to watch ?</h1>
+    <br>
+    <br>
+
+    <center>
+        <form>
+            <i class="fa-solid fa-magnifying-glass pr-1"></i>
+
+            <input type="text" name="q" value="" placeholder="search for movies/Tvshows">
+        </form>
+    </center>
+    <br>
+    <br>
+
+
+    <center>
+        <ul class="grid">
+            {{range .Results}}
+            {{if eq .MediaType "movie" }}
+
+            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1" target="_blank">
+                <li class="card">
+                    <div class="card-head">
+
+                        <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
+                    </div>
+                    <div class="card-body txt-dark">
+
+                        <h2 class="card-title">{{.Title}}</h2>
+                        <span
+                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
+                        <br>
+
+                        <b>{{.VoteAverage}}</b>
+                        <br>
+                        <b>{{.ReleaseDate}}</b>
+                        <br>
+
+                    </div>
+                </li>
+            </a>
+            {{else}}
+            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1" target="_blank">
+                <li class="card">
+                    <div class="card-head">
+
+                        <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
+                    </div>
+                    <div class="card-body txt-dark">
+
+                        <h2 class="card-title">{{.Title}}</h2>
+                        <span
+                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
+                        <br>
+
+                        <b>{{.VoteAverage}}</b>
+                        <br>
+                        <b>{{.ReleaseDate}}</b>
+                        <br>
+
+                    </div>
+                </li>
+            </a>
+
+            {{end}}
+            {{end}}
+        </ul>
+
+    </center>
+</div>
+{{end}}

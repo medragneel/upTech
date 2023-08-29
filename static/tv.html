@@ -1,60 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Uptech -movie Tv show </title>
-    <link rel="stylesheet" href="css/style.css" media="all">
-</head>
-<body>
-        <nav class="nav pl-2 pr-2">
-        <div class="logo">UpTech</div>
-        <div class="nav-links">
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/movies">Movies</a></li>
-                <li><a href="/tv-shows">TvShows</a></li>
-                <li><a href="/anime">animes</a></li>
-            </ul>
-        </div>
-    </nav>
-    <br>
+{{define "title"}} Movies {{end}}
+{{define "main"}}
+<br>
+
+<div class="container">
+    <h1 class="txt-light">Tv Shows</h1>
     <br>
 
-    <div class="container">
-        <h1 class="txt-light">Tv Shows</h1>
-        <br>
+    <ul class="grid">
+        {{range .Results}}
+        <center>
 
-        <ul class="grid">
-            {{range .Results}}
-            <center>
-
-                <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1
+            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1
                          " target="_blank">
-                    <li class="card">
-                        <div class="card-head">
+                <li class="card">
+                    <div class="card-head">
 
-                            <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
-                        </div>
-                        <div class="card-body txt-dark">
+                        <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
+                    </div>
+                    <div class="card-body txt-dark">
 
-                            <h2 class="card-title">{{.Name}}</h2>
-                            <span style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
-                            <br>
+                        <h2 class="card-title">{{.Name}}</h2>
+                        <span
+                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
+                        <br>
 
-                            <b>{{.VoteAverage}}</b>
-                            <br>
-                            <b>{{.FirstAirDate}}</b>
-                            <br>
+                        <b>{{.VoteAverage}}</b>
+                        <br>
+                        <b>{{.FirstAirDate}}</b>
+                        <br>
 
-                        </div>
-                    </li>
-                </a>
-            </center>
-            {{end}}
-        </ul>
-    </div>
-    <br>
-    <br>
-
-</body>
-</html>
+                    </div>
+                </li>
+            </a>
+        </center>
+        {{end}}
+    </ul>
+</div>
+<br>
+<br>
+{{end}}
