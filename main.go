@@ -7,13 +7,14 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 
 	"github.com/gorilla/mux"
 	"github.com/joho/godotenv"
 )
 
-const baseUrl = "http://localhost:3000/"
+const baseUrl = "http://localhost:8000/"
 
 func getenv(key string) (string, error) {
 	err := godotenv.Load(".env")
@@ -76,7 +77,8 @@ func search(w http.ResponseWriter, r *http.Request) {
 	}
 	var response Response
 	query := r.FormValue("q")
-	url := fmt.Sprintf("https://api.themoviedb.org/3/search/multi?query=%s&include_adult=false&language=en-US&page=1", query)
+    encodedQuery := url.QueryEscape(query)
+	url := fmt.Sprintf("https://api.themoviedb.org/3/search/multi?query=%s&include_adult=false&language=en-US&page=1", encodedQuery)
 
 	req, _ := http.NewRequest("GET", url, nil)
 

@@ -1,5 +1,6 @@
 {{define "title"}} Anime {{end}}
 {{define "main"}}
+
 <div class="container">
 
     <h1 class="txt-light align-center">What do you want to watch ?</h1>
@@ -20,6 +21,46 @@
         <ul class="grid">
             {{range .Results}}
             <a href="/{{.ID}}">
+                <li class="movie-card">
+                    <div class="movie-poster">
+                        <span class="movie-rating bg-danger">{{.SubOrDub}}</span>
+                        <img src={{.Image}} alt="Movie Poster">
+                    </div>
+                    <div class="movie-details">
+                        <h2 class="movie-title txt-dark">{{.Title}}</h2>
+                        <p class="movie-release">Release Date: {{.ReleaseDate}}</p>
+                    </div>
+                </li>
+
+                <!-- <li class="card"> -->
+                <!--     <div class="card-head"> -->
+                <!---->
+                <!--         <img src={{.Image}} alt=""> -->
+                <!--     </div> -->
+                <!--     <div class="card-body txt-dark"> -->
+                <!--         <span class="bg-danger pl-2 pr-2">{{.SubOrDub}}</span> -->
+                <!--         <br> -->
+                <!--         <br> -->
+                <!---->
+                <!---->
+                <!--         <h2 class="card-title">{{.Title}}</h2> -->
+                <!--         <br> -->
+                <!---->
+                <!---->
+                <!--         <b>{{.ReleaseDate}}</b> -->
+                <!--         <br> -->
+                <!---->
+                <!--     </div> -->
+                <!-- </li> -->
+            </a>
+
+            {{end}}
+        </ul>
+    </center>
+</div>
+<br>
+<br>
+{{end}}
 
                 <li class="card">
                     <div class="card-head">
@@ -27,9 +68,14 @@
                         <img src={{.Image}} alt="">
                     </div>
                     <div class="card-body txt-dark">
+                        <span class="bg-danger pl-2 pr-2">{{.SubOrDub}}</span>
+                        <br>
+                        <br>
+
 
                         <h2 class="card-title">{{.Title}}</h2>
                         <br>
+
 
                         <b>{{.ReleaseDate}}</b>
                         <br>
@@ -37,12 +83,5 @@
                     </div>
                 </li>
             </a>
-            {{end}}
-        </ul>
-    </center>
 
 
-</div>
-<br>
-<br>
-{{end}}

@@ -2358,3 +2358,58 @@ table th, table td {
     align-items: self-end;
     flex-direction: column;
 }
+.movie-card {
+        width: 200px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+    }
+
+    .movie-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .movie-poster img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    .movie-details {
+        padding: 16px;
+        display: none;
+    }
+
+    .movie-card:hover .movie-details {
+        display: block;
+    }
+
+    .movie-title {
+        margin: 0;
+        font-size: 1.2em;
+    }
+
+    .movie-description {
+        font-size: 0.9em;
+        color: #555;
+    }
+
+    .movie-release {
+        font-size: 0.8em;
+        color: #888;
+        margin-top: 10px;
+    }
+
+    .movie-rating {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }

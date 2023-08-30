@@ -12,25 +12,37 @@
 
             <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1
                          " target="_blank">
-                <li class="card">
-                    <div class="card-head">
-
-                        <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
+                <!-- <li class="card"> -->
+                <!--     <div class="card-head"> -->
+                <!---->
+                <!--         <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt=""> -->
+                <!--     </div> -->
+                <!--     <div class="card-body txt-dark"> -->
+                <!---->
+                <!--         <h2 class="card-title">{{.Name}}</h2> -->
+                <!--         <span -->
+                <!--             style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span> -->
+                <!--         <br> -->
+                <!---->
+                <!--         <b>{{.VoteAverage}}</b> -->
+                <!--         <br> -->
+                <!--         <b>{{.FirstAirDate}}</b> -->
+                <!--         <br> -->
+                <!---->
+                <!--     </div> -->
+                <!-- </li> -->
+                <div class="movie-card">
+                    <div class="movie-poster">
+                        <span class="movie-rating bg-danger">{{.VoteAverage}}</span>
+                        <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="Movie Poster">
                     </div>
-                    <div class="card-body txt-dark">
-
-                        <h2 class="card-title">{{.Name}}</h2>
-                        <span
-                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
-                        <br>
-
-                        <b>{{.VoteAverage}}</b>
-                        <br>
-                        <b>{{.FirstAirDate}}</b>
-                        <br>
-
+                    <div class="movie-details">
+                        <h2 class="movie-title txt-dark">{{.Name}}</h2>
+                        <p class="movie-description">{{.Overview}}</p>
+                        <p class="movie-release">Release Date: {{.FirstAirDate}}</p>
                     </div>
-                </li>
+                </div>
+
             </a>
         </center>
         {{end}}

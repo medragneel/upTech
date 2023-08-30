@@ -25,44 +25,33 @@
             {{if eq .MediaType "movie" }}
 
             <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1" target="_blank">
-                <li class="card">
-                    <div class="card-head">
+                <li class="movie-card">
+                    <div class="movie-poster">
+                        <span class="movie-rating bg-danger">{{.VoteAverage}}</span>
 
                         <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
                     </div>
-                    <div class="card-body txt-dark">
+                    <div class="movie-details">
 
-                        <h2 class="card-title">{{.Title}}</h2>
-                        <span
-                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
-                        <br>
-
-                        <b>{{.VoteAverage}}</b>
-                        <br>
-                        <b>{{.ReleaseDate}}</b>
-                        <br>
+                        <h2 class="movie-title txt-dark">{{.Title}}</h2>
+                        <p class="movie-description">{{.Overview}}</p>
+                        <p class="movie-release">Release Date: {{.ReleaseDate}}</p>
 
                     </div>
                 </li>
             </a>
             {{else}}
             <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1" target="_blank">
-                <li class="card">
-                    <div class="card-head">
+                <li class="movie-card">
+                    <div class="movie-poster">
+                        <span class="movie-rating bg-danger">{{.VoteAverage}}</span>
 
                         <img src="https://image.tmdb.org/t/p/w200/{{.PosterPath}}" alt="">
                     </div>
-                    <div class="card-body txt-dark">
-
-                        <h2 class="card-title">{{.Title}}</h2>
-                        <span
-                            style="display:inline-block;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;max-width: 13ch;">{{.Overview}}</span>
-                        <br>
-
-                        <b>{{.VoteAverage}}</b>
-                        <br>
-                        <b>{{.ReleaseDate}}</b>
-                        <br>
+                    <div class="movie-details">
+                        <h2 class="movie-title txt-dark">{{.Title}}</h2>
+                        <p class="movie-description">{{.Overview}}</p>
+                        <p class="movie-release">Release Date: {{.ReleaseDate}}</p>
 
                     </div>
                 </li>
