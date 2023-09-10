@@ -14,7 +14,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const baseUrl = "http://localhost:8000/"
+// const baseUrl = "http://localhost:8000/"
+const baseUrl = "https://api-for-netlify.vercel.app/"
 
 func getenv(key string) (string, error) {
 	err := godotenv.Load(".env")
@@ -303,8 +304,9 @@ func getServers(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+    port,_ := getenv("PORT")
 
-	fmt.Println("server running on port :5000")
+    fmt.Printf("server running on port :%s",port)
 	r := mux.NewRouter().StrictSlash(true)
 	r.PathPrefix("/css/").Handler(
 		http.StripPrefix("/css/", http.FileServer(http.Dir("static/css/"))),
@@ -318,6 +320,6 @@ func main() {
 	r.HandleFunc("/watch/{epid}", getServers)
 	http.Handle("/", r)
 
-	log.Fatal(http.ListenAndServe(":5000", r))
+    log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s",port), r))
 
 }

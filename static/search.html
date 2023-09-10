@@ -24,7 +24,7 @@
             {{range .Results}}
             {{if eq .MediaType "movie" }}
 
-            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1" target="_blank">
+            <a href="https://vidsrc.to/embed/movie/{{.ID}}" target="_blank">
                 <li class="movie-card">
                     <div class="movie-poster">
                         <span class="movie-rating bg-danger">{{.VoteAverage}}</span>
@@ -41,7 +41,7 @@
                 </li>
             </a>
             {{else}}
-            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1&s=1&e=1" target="_blank">
+            <a href="https://vidsrc.to/embed/tv/{{.ID}}" target="_blank">
                 <li class="movie-card">
                     <div class="movie-poster">
                         <span class="movie-rating bg-danger">{{.VoteAverage}}</span>

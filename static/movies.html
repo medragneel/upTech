@@ -10,7 +10,8 @@
     <ul class="grid">
         {{range .Results}}
         <center>
-            <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1" target="_blank">
+            <!-- <a href="https://multiembed.mov/?video_id={{.ID}}&tmdb=1" target="_blank"> -->
+            <a href="https://vidsrc.to/embed/movie/{{.ID}}" target="_blank" >
                 <div class="movie-card">
                     <div class="movie-poster">
                         <span class="movie-rating bg-danger">{{.VoteAverage}}</span>
